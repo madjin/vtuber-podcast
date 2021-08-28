@@ -40,6 +40,16 @@ If you want to record your avatar standing somewhere, position it to capture the
 5. If its on, go to Effects and disable shadows
 6. Make sure the right microphone is set by going to the Face tab and looking at LipSync
 
+## Configure VSeeFace
+
+VSeeFace works great with a webcam for face tracking while vtubing. Many great tutorials are listed here: https://www.vseeface.icu/#tutorials
+
+When you're finished configuring, click this tiny x in the corner to hide the UI:
+
+![image](https://user-images.githubusercontent.com/32600939/131228068-632aab5e-698a-4f8c-893c-ab51b7a99a39.png)
+
+Note: You can load into OBS as a transparent video, no need for green screen filter.
+
 ## Configure OBS
 
 1. Create a new scene, add a source for window capture with VMagicMirror selected.
@@ -53,8 +63,21 @@ When your OBS looks like this, you are ready to record. Hop into a Discord call 
 
 ![image](https://user-images.githubusercontent.com/32600939/128776442-b2fc29c9-b8d3-4cea-94f5-3c01d7e4d7bb.png)
 
+### Record with Screenshare
+
+If using screenshare to present while vtubing, you can setup OBS like the picture below.
+
+![image](https://user-images.githubusercontent.com/32600939/131227862-f06758bc-883c-4e74-bdc6-c2b11be2ee4d.png)
+
+During post editing you'll be able to crop the window and the vtuber avatar into separate videos or UV map them in such a way to spatialize in a 3D scene.
+
+![image](https://user-images.githubusercontent.com/32600939/131227932-53a1120e-aa5c-4238-9cdd-38bd5c7100b3.png)
+
+Example ffmpeg command to split into 2 videos:
+
+`ffmpeg -i test.mp4 -filter_complex "[0:v]crop=290:313:0:103[face];[0:v]crop=954:530:340:114[pres]" -map "[face]" -map 0:a face.mp4 "[pres]" -map 0:a pres.mp4`
 
 #### To-do
 
-- VSeeFace setup
-- Avatar + Screen share recording setup
+- [x] VSeeFace setup
+- [x] Avatar + Screen share recording setup
