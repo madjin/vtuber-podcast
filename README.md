@@ -77,6 +77,10 @@ Example ffmpeg command to split into 2 videos:
 
 `ffmpeg -i test.mp4 -filter_complex "[0:v]crop=290:313:0:103[face];[0:v]crop=954:530:340:114[pres]" -map "[face]" -map 0:a face.mp4 "[pres]" -map 0:a pres.mp4`
 
+Example ffmpeg command to do the conversion to alpha webm:
+
+`ffmpeg -i file.mp4 -vf "chromakey=01d800:0.1:0.2" -c:v libvpx -b:v 1M -auto-alt-ref 0 out.webm`
+
 #### To-do
 
 - [x] VSeeFace setup
