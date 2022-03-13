@@ -67,19 +67,32 @@ When your OBS looks like this, you are ready to record. Hop into a Discord call 
 
 If using screenshare to present while vtubing, you can setup OBS like the picture below.
 
-![image](https://user-images.githubusercontent.com/32600939/131227862-f06758bc-883c-4e74-bdc6-c2b11be2ee4d.png)
+![](https://i.imgur.com/U2vGQ07.png)
 
-During post editing you'll be able to crop the window and the vtuber avatar into separate videos or UV map them in such a way to spatialize in a 3D scene.
+There's an overlay template included in this repo that you can add as an OBS source to make life easier. Feel free to modify it using the Gimp save file.
 
-![image](https://user-images.githubusercontent.com/32600939/131227932-53a1120e-aa5c-4238-9cdd-38bd5c7100b3.png)
+### Process videos
 
-Example ffmpeg command to split into 2 videos:
+ffmpeg command to split 1080p recording with background overlay into 2 videos:
 
-`ffmpeg -i test.mp4 -filter_complex "[0:v]crop=290:313:0:103[face];[0:v]crop=954:530:340:114[pres]" -map "[face]" -map 0:a face.mp4 "[pres]" -map 0:a pres.mp4`
+`ffmpeg -i test.mp4 -filter_complex "[0:v]crop=540:520:0:145[face]" -map "[face]" -map 0:a face.mp4 -filter_complex "[0:v]crop=1377:780:542:135[pres]" -map "[pres]" -map 0:a pres.mp4`
 
 Example ffmpeg command to do the conversion to alpha webm:
 
-`ffmpeg -i file.mp4 -vf "chromakey=01d800:0.1:0.2" -c:v libvpx -b:v 1M -auto-alt-ref 0 out.webm`
+`ffmpeg -i face.mp4 -vf "chromakey=01d800:0.1:0.2" -c:v libvpx -b:v 1M -auto-alt-ref 0 face.webm`
+
+### Virtual world demo
+
+Github: https://github.com/madjin/vr-conf
+
+During post editing you'll be able to crop the window and the vtuber avatar into separate videos or UV map them in such a way to spatialize in a 3D scene.
+
+![](https://i.imgur.com/4VnxUl3.jpg)
+
+This can work with real life conference videos too if the background behind the speaker can be keyed out. Either use AI removal or plan ahead with a plain solid color background behind the speaker area.
+
+![image](https://user-images.githubusercontent.com/32600939/131227932-53a1120e-aa5c-4238-9cdd-38bd5c7100b3.png)
+	
 
 #### To-do
 
